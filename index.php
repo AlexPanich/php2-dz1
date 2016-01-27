@@ -1,11 +1,8 @@
 <?php
 
-
-
 require_once __DIR__.'/autoload.php';
 
-//$users = \App\Models\User::findAll();
-$user = \App\Models\User::findById(1);
+$news = \App\Models\Article::findLastThree();
 
-var_dump($user);
+require_once __DIR__.'/templates/index.php';
 

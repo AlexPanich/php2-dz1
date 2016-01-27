@@ -27,4 +27,7 @@ abstract class Model
 
         return !$res ? false : $res[0];
     }
+
+
+
 }
