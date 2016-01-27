@@ -10,6 +10,7 @@ class DB
     public function __construct()
     {
         $this->dbh = new \PDO('mysql:host=localhost;dbname=php2', 'root', '');
+        $this->dbh->query('SET NAMES utf8');
     }
 
     public function execute($sql, $sub = [])
