@@ -31,11 +31,11 @@ class Article extends Model
         return mb_substr($this->text, 0, 60) . '...';
     }
 
-    public static function findLastThree() {
+    public static function findLastN($n) {
         $db = new \App\DB();
         $res = $db->query(
             'SELECT * FROM ' . self::TABLE .
-            ' ORDER BY id DESC LIMIT 3',
+            ' ORDER BY id DESC LIMIT ' . $n,
             self::class
         );
         return $res;
