@@ -7,14 +7,14 @@
 <body>
 <h2>Новости нашего городка:</h2>
 <ul>
-    <? foreach( $news as $article ): ?>
+    <?php foreach( $news as $article ): ?>
         <li>
             <a href="article.php?id=<?= $article->getId() ?>">
                 <h3><?= $article->getTitle() ?></h3>
             </a>
             <p><?= $article->getShortText() ?></p>
         </li>
-    <? endforeach ?>
+    <?php endforeach ?>
 </ul>
 </body>
 </html>
