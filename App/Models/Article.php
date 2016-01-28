@@ -33,9 +33,10 @@ class Article extends Model
 
     public static function findLastN($n) {
         $db = new \App\DB();
+        $sql = sprintf('SELECT * FROM ' . self::TABLE .
+            ' ORDER BY id DESC LIMIT %d', $n);
         $res = $db->query(
-            'SELECT * FROM ' . self::TABLE .
-            ' ORDER BY id DESC LIMIT ' . $n,
+            $sql,
             self::class
         );
         return $res;

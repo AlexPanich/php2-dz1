@@ -30,7 +30,6 @@ class DB
 
     public function execute($sql, $sub = [])
     {
-        $sub = $this->prepareArray($sub);
         $sth = $this->dbh->prepare($sql);
         $res = $sth->execute($sub);
         return $res;
