@@ -5,6 +5,7 @@ namespace App;
 
 class DB
 {
+    use Singleton;
     protected $dbh;
 
     protected function prepareArray($sub) {

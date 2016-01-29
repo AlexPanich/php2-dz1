@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Model;
+use App\DB;
 
 class Article extends Model
 {
@@ -32,7 +33,7 @@ class Article extends Model
     }
 
     public static function findLastN($n) {
-        $db = new \App\DB();
+        $db = DB::instance();
         $sql = sprintf('SELECT * FROM ' . self::TABLE .
             ' ORDER BY id DESC LIMIT %d', $n);
         $res = $db->query(

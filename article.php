@@ -2,6 +2,7 @@
 
 if ( !isset($_GET['id']) ) {
     header('Location: index.php');
+    exit();
 }
 
 require_once __DIR__.'/autoload.php';
