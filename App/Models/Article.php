@@ -12,7 +12,16 @@ class Article extends Model
 
     protected $title;
     protected $text;
-    protected $id;
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function setText($txt)
+    {
+        $this->text = $txt;
+    }
 
     public function getText()
     {

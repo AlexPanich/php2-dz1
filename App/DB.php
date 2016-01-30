@@ -7,6 +7,18 @@ class DB
 {
     use Singleton;
     protected $dbh;
+    protected $lastInsertID;
+    protected $rowCount;
+
+    public function getLastInsertID()
+    {
+        return $this->lastInsertID;
+    }
+
+    public function getRowCount()
+    {
+        return $this->rowCount;
+    }
 
     protected function prepareArray($sub) {
         if (!$sub) {
@@ -38,6 +50,10 @@ class DB
     {
         $sth = $this->dbh->prepare($sql);
         $res = $sth->execute($sub);
+        if (false != $res) {
+            $this->lastInsertID = $this->dbh->lastInsertId();
+            $this->rowCount = $sth->rowCount();
+        }
         return $res;
     }
 
