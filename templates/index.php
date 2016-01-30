@@ -5,6 +5,7 @@
     <title>Главная страница - Новости</title>
 </head>
 <body>
+<a href="admin.php">Панель администратора</a>
 <h2>Новости нашего городка:</h2>
 <ul>
     <?php foreach( $news as $article ): ?>

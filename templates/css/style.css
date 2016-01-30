@@ -1,0 +1,30 @@
+.page-title {
+    text-align: center;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.input-title {
+    margin-bottom: 20px;
+}
+
+.area-text {
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    width: 50%;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.a-return {
+    align-self: center;
+}
