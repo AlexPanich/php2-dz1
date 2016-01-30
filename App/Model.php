@@ -47,6 +47,9 @@ abstract class Model
             if ( 'id' == $key ) {
                 continue;
             }
+            if ( !$value && $value !== '0' ) {
+                return false;
+            }
             $columns[] = $key;
             $values[':'.$key] = $value;
         }
@@ -56,8 +59,9 @@ abstract class Model
                 'VALUES ('.implode(',', array_keys($values)) .')';
 
         $db = DB::instance();
-        $db->execute($sql, $values);
+        $res = $db->execute($sql, $values);
         $this->id = $db->getLastInsertID();
+        return $res;
     }
 
     public function update()
@@ -72,6 +76,9 @@ abstract class Model
             if ( 'id' == $key ) {
                 continue;
             }
+            if ( !$value && $value !== '0' ) {
+                return false;
+            }
             $sets[] = $key.'=:'.$key;
             $values[':'.$key] = $value;
         }
@@ -80,15 +87,14 @@ abstract class Model
                 ' SET ' .implode(',', $sets) .
                 ' WHERE ' . 'id='.$this->id;
 
-
         $db = DB::instance();
-        $db->execute($sql, $values);
+        return $db->execute($sql, $values);
 
     }
 
     public function save()
     {
-        $this->isNew() ? $this->insert() : $this->update();
+        return $this->isNew() ? $this->insert() : $this->update();
     }
 
     public function delete()
@@ -96,7 +102,7 @@ abstract class Model
         $sql = 'DELETE FROM ' .static::TABLE .
                 ' WHERE id=' . $this->id;
         $db = DB::instance();
-        $db->execute($sql);
+        return $db->execute($sql);
     }
 
 }

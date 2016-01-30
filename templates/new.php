@@ -8,11 +8,15 @@
 <body>
 <h2 class="page-title">Панель администратора - создание новой статьи</h2>
 
+<?php if($error): ?>
+    <div class="error">Внимание! Необходимо заполнить все поля!</div>
+<?php endif ?>
+
 <form action="new.php" method="post" class="form">
     <laber for="article-title">Название статьи:</laber>
-    <input class="input-title" type="text" id="article-title" name="title">
+    <input class="input-title" type="text" id="article-title" name="title" value="<?= $error ? $article->getTitle() : '' ?>">
     <laber for="article-text">Текст статьи</laber>
-    <textarea class="area-text" id="article-text" name="text"></textarea>
+    <textarea class="area-text" id="article-text" name="text"><?= $error ? $article->getText() : '' ?></textarea>
     <input class="btn btn-submit" type="submit" name="submit" value="Создать статью">
     <a class="a-return" href="admin.php">Вернуться в панель администратора не сохраняя</a>
 </form>

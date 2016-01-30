@@ -28,3 +28,14 @@
 .a-return {
     align-self: center;
 }
+
+.error {
+    border: 2px solid darkred;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: palevioletred;
+    color: darkred;
+    font-size: 20px;
+    text-align: center;
+}

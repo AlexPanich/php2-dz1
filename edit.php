@@ -9,19 +9,23 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
     $article = \App\Models\Article::findById($id);
     $article->setTitle($title);
     $article->setText($text);
-    $article->save();
-    header('Location: /admin.php');
-    exit();
+    if ( $article->save() ) {
+        header('Location: /admin.php');
+        exit();
+    } else {
+       $error = true;
+    }
+} else {
+
+    if (!isset($_GET['id'])) {
+        header('Location: /admin.php');
+        exit();
+    }
+
+    $error = false;
+    $id = (int)$_GET['id'];
+    $article = \App\Models\Article::findById($id);
 }
-
-if ( !isset($_GET['id']) ) {
-    header('Location: /admin.php');
-    exit();
-}
-
-$id = (int)$_GET['id'];
-$article = \App\Models\Article::findById($id);
-
 require_once __DIR__.'/templates/edit.php';
 
 
