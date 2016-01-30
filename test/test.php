@@ -20,13 +20,14 @@ $config = \App\Config::instance();
 
 echo $config->data['db']['host'];
 
-$newArticle = new \App\Models\Article();
-$newArticle->setTitle('Заголовок новой статьи');
-$newArticle->setText('текс статьи текс статьи текс статьитекс статьитекс статьитекс статьимтекс статьитекс статьи');
-$newArticle->save();
-echo $newArticle->getId();
-
+//$newArticle = new \App\Models\Article();
+//$newArticle->setTitle('Заголовок новой статьи');
+//$newArticle->setText('текс статьи текс статьи текс статьитекс статьитекс статьитекс статьимтекс статьитекс статьи');
+//$newArticle->save();
+//echo $newArticle->getId();
+//
 $article = \App\Models\Article::findById(12);
-$article->setTitle('Опять Измененный заголовок');
-$article->setText('Снова Измененное содержание статьи тра тра тра тра тра');
-$article->save();
+//$article->setTitle('Опять Измененный заголовок');
+//$article->setText('Снова Измененное содержание статьи тра тра тра тра тра');
+//$article->save();
+$article->delete();

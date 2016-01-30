@@ -91,4 +91,12 @@ abstract class Model
         $this->isNew() ? $this->insert() : $this->update();
     }
 
+    public function delete()
+    {
+        $sql = 'DELETE FROM ' .static::TABLE .
+                ' WHERE id=' . $this->id;
+        $db = DB::instance();
+        $db->execute($sql);
+    }
+
 }
