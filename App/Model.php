@@ -8,6 +8,7 @@ abstract class Model
     const TABLE = '';
 
     protected $id;
+    protected $required = [];
 
     public static function findAll()
     {
@@ -38,26 +39,31 @@ abstract class Model
     public function insert()
     {
         if (!$this->isNew()) {
-            return;
+            return false;
         }
 
         $columns = [];
+        $masks = [];
         $values = [];
         foreach ( $this as $key => $value) {
-            if ( 'id' == $key ) {
+            if ( 'id' == $key || 'required' == $key ) {
                 continue;
             }
             if ( !$value && $value !== '0' ) {
-                return false;
+                if ( in_array($key, $this->required) ) {
+                    return false;
+                }
+                $masks[] = 'NULL';
+            } else {
+                $masks[] = ':'.$key;
+                $values[':'.$key] = $value;
             }
             $columns[] = $key;
-            $values[':'.$key] = $value;
         }
 
         $sql = 'INSERT INTO ' . static::TABLE .
                 '('.implode(',',$columns).') '.
-                'VALUES ('.implode(',', array_keys($values)) .')';
-
+                'VALUES ('.implode(',', $masks) .')';
         $db = DB::instance();
         $res = $db->execute($sql, $values);
         $this->id = $db->getLastInsertID();
@@ -67,20 +73,25 @@ abstract class Model
     public function update()
     {
         if ($this->isNew()) {
-            return;
+            return false;
         }
 
         $sets = [];
         $values = [];
         foreach ( $this as $key => $value) {
-            if ( 'id' == $key ) {
+            if ( 'id' == $key || 'required' == $key ) {
                 continue;
             }
             if ( !$value && $value !== '0' ) {
-                return false;
+                if ( in_array($key, $this->required) ) {
+                    return false;
+                }
+                $sets[] = $key.'=NULL';
+            } else {
+                $sets[] = $key.'=:'.$key;
+                $values[':'.$key] = $value;
             }
-            $sets[] = $key.'=:'.$key;
-            $values[':'.$key] = $value;
+            $columns[] = $key;
         }
 
         $sql = 'UPDATE ' . static::TABLE .
