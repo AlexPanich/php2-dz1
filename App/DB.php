@@ -6,7 +6,7 @@ namespace App;
 class DB
 {
     use Singleton;
-    
+
     protected $dbh;
     protected $lastInsertID;
     protected $rowCount;

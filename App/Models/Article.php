@@ -12,7 +12,7 @@ class Article extends Model
 
     protected $title;
     protected $text;
-    protected $required = ['title'];
+    protected static $required = ['title'];
 
     public function setTitle($title)
     {

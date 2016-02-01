@@ -8,7 +8,7 @@ abstract class Model
     const TABLE = '';
 
     protected $id;
-    protected $required = [];
+    protected static $required = [];
 
     public static function findAll()
     {
@@ -50,7 +50,7 @@ abstract class Model
                 continue;
             }
             if ( !$value && $value !== '0' ) {
-                if ( in_array($key, $this->required) ) {
+                if ( in_array($key, static::$required) ) {
                     return false;
                 }
                 $masks[] = 'NULL';
@@ -83,7 +83,7 @@ abstract class Model
                 continue;
             }
             if ( !$value && $value !== '0' ) {
-                if ( in_array($key, $this->required) ) {
+                if ( in_array($key, static::$required) ) {
                     return false;
                 }
                 $sets[] = $key.'=NULL';
