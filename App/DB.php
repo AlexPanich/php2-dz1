@@ -36,7 +36,7 @@ class DB
         return $arr;
     }
 
-    public function __construct()
+    protected function __construct()
     {
         $config = Config::instance();
         $this->dbh = new \PDO(
