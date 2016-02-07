@@ -17,11 +17,13 @@ class Article extends Model
     public function setTitle($title)
     {
         $this->title = $title;
+        return $this;
     }
 
     public function setText($txt)
     {
         $this->text = $txt;
+        return $this;
     }
 
     public function getText()

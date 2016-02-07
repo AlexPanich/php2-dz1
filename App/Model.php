@@ -25,7 +25,7 @@ abstract class Model
         $res = $db->query(
             'SELECT * FROM ' . static::TABLE .' WHERE id=:id',
             static::class,
-            ['id' => $id]
+            [':id' => $id]
         );
 
         return !$res ? false : $res[0];

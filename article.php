@@ -7,8 +7,10 @@ if ( !isset($_GET['id']) ) {
 
 require_once __DIR__.'/autoload.php';
 
+$view = new \App\View();
+
 $id = (int)$_GET['id'];
 
-$article = \App\Models\Article::findById($id);
+$view->article = \App\Models\Article::findById($id);
 
-require_once __DIR__.'/templates/article.php';
+$view->display(__DIR__.'/templates/article.php');

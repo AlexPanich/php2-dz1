@@ -2,23 +2,25 @@
 
 require_once __DIR__.'/autoload.php';
 
-if ( isset($_POST['submit']) ) {
+$view = new \App\View();
+
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $article = new \App\Models\Article();
 
     $title = htmlspecialchars(strip_tags(trim($_POST['title'])));
     $text = htmlspecialchars(strip_tags(trim($_POST['text'])));
 
-    $article->setTitle($title);
-    $article->setText($text);
+    $article->setTitle($title)->setText($text);
 
     if ($article->save()) {
         header('Location: /admin.php');
         exit();
     }
 
-    $error = true;
+    $view->article = $article;
+    $view->error = true;
 } else {
-    $error = false;
+    $view->error = false;
 }
 
-require_once __DIR__.'/templates/new.php';
+$view->display(__DIR__.'/templates/new.php');

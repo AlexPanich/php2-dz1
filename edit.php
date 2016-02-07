@@ -7,13 +7,15 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = htmlspecialchars(strip_tags(trim($_POST['title'])));
     $text = htmlspecialchars(strip_tags(trim($_POST['text'])));
     $article = \App\Models\Article::findById($id);
-    $article->setTitle($title);
-    $article->setText($text);
+    $article->setTitle($title)->setText($text);
+
     if ( $article->save() ) {
         header('Location: /admin.php');
         exit();
     } else {
-       $error = true;
+        $view = new \App\View();
+        $view->article = $article;
+        $view->error = true;
     }
 } else {
 
@@ -22,10 +24,11 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $error = false;
+    $view = new \App\View();
+    $view->error = false;
     $id = (int)$_GET['id'];
-    $article = \App\Models\Article::findById($id);
+    $view->article = \App\Models\Article::findById($id);
 }
-require_once __DIR__.'/templates/edit.php';
+$view->display(__DIR__.'/templates/edit.php');
 
 
