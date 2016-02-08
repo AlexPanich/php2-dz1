@@ -39,3 +39,10 @@
     font-size: 20px;
     text-align: center;
 }
+
+.author,
+.no-author {
+    font-size: smaller;
+    font-style: italic;
+    font-color: #eee;
+}

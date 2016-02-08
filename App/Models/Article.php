@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Model;
 use App\DB;
 
@@ -13,6 +12,7 @@ class Article extends Model
     protected $title;
     protected $text;
     protected static $required = ['title'];
+    protected $author_id;
 
     public function setTitle($title)
     {
@@ -53,5 +53,19 @@ class Article extends Model
             self::class
         );
         return $res;
+    }
+
+    public function __get($name) {
+        if ( $name == 'authors' ) {
+            if (!empty($this->author_id)) {
+                return Author::findById($this->author_id);
+            }
+        }
+        return null;
+    }
+
+    public function hasAuthors()
+    {
+        return !empty($this->author_id);
     }
 }

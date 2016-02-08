@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Главная страница - Новости</title>
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body>
 <a href="admin.php">Панель администратора</a>
@@ -14,6 +15,9 @@
                 <h3><?= $article->getTitle() ?></h3>
             </a>
             <p><?= $article->getShortText() ?></p>
+            <?php if ( $article->hasAuthors() ): ?>
+                <blockquote class="author">Автор: <?= $article->authors; ?></blockquote>
+            <?php endif ?>
         </li>
     <?php endforeach ?>
 </ul>
