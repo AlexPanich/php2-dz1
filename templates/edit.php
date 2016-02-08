@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/templates/css/style.css">
 </head>
 <body>
-<h2 class="page-title">Панель администратора - создание новой статьи</h2>
+<h2 class="page-title">Панель администратора - редактирование новой статьи</h2>
 
 <?php if($error): ?>
     <div class="error">Внимание! Необходимо заполнить все обязательные (
@@ -16,6 +16,7 @@
         ) поля!</div>
 <?php endif ?>
 
+<div>Автор статьи: <?= $article->authors ? : 'Без автора' ?></div>
 <form action="edit.php" method="post" class="form">
     <laber for="article-title">Название статьи:</laber>
     <input class="input-title" type="text" id="article-title" name="title" value="<?=  $article->getTitle() ?>">
