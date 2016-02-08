@@ -5,6 +5,10 @@ namespace App\Models;
 
 use App\Model;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Model
 {
     const TABLE = 'users';
@@ -12,13 +16,16 @@ class User extends Model
     protected $email;
     protected $name;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -26,8 +33,8 @@ class User extends Model
     }
 
     /**
-     * @param mixed $email
-     * @return User ;
+     * @param string $email
+     * @return User
      */
     public function setEmail($email)
     {
@@ -36,7 +43,7 @@ class User extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -45,7 +52,7 @@ class User extends Model
 
     /**
      * @param mixed $name
-     * @return User ;
+     * @return User
      */
     public function setName($name)
     {

@@ -3,24 +3,47 @@
 namespace App;
 
 
+/**
+ * Class DB
+ * @package App
+ */
 class DB
 {
     use Singleton;
 
+    /**
+     * @var \PDO
+     */
     protected $dbh;
+    /**
+     * @var integer
+     */
     protected $lastInsertID;
+    /**
+     * @var integer
+     */
     protected $rowCount;
 
+    /**
+     * @return integer
+     */
     public function getLastInsertID()
     {
         return $this->lastInsertID;
     }
 
+    /**
+     * @return integer
+     */
     public function getRowCount()
     {
         return $this->rowCount;
     }
 
+    /**
+     * @param array $sub
+     * @return array
+     */
     protected function prepareArray($sub) {
         if (!$sub) {
             return $sub;
@@ -36,6 +59,9 @@ class DB
         return $arr;
     }
 
+    /**
+     * Constructor
+     */
     protected function __construct()
     {
         $config = Config::instance();
@@ -47,6 +73,11 @@ class DB
         $this->dbh->query('SET NAMES utf8');
     }
 
+    /**
+     * @param string, $sql
+     * @param array $sub
+     * @return bool
+     */
     public function execute($sql, $sub = [])
     {
         $sth = $this->dbh->prepare($sql);
@@ -58,6 +89,12 @@ class DB
         return $res;
     }
 
+    /**
+     * @param string $sql
+     * @param  $class
+     * @param array $sub
+     * @return array
+     */
     public function query($sql, $class, $sub = [])
     {
         $sub = $this->prepareArray($sub);

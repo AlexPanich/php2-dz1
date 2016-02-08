@@ -4,11 +4,19 @@
 namespace App;
 
 
+/**
+ * Class View
+ * @package App
+ */
 class View
     implements \Countable
 {
     use Magic;
 
+    /**
+     * @param string $template
+     * @return string
+     */
     public function render($template)
     {
         ob_start();
@@ -19,6 +27,9 @@ class View
         return ob_get_clean();
     }
 
+    /**
+     * @param string $template
+     */
     public  function display($template)
     {
         echo $this->render($template);
