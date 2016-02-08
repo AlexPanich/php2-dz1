@@ -1,5 +1,6 @@
 <?php
 
+
 require_once __DIR__.'/autoload.php';
 
 $view = new \App\View();
@@ -18,7 +19,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     }
 
     $view->article = $article;
-    $view->error = true;
+    $view->error = \App\Error::instance();
 } else {
     $view->error = false;
 }

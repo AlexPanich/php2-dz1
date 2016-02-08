@@ -8,8 +8,12 @@
 <body>
 <h2 class="page-title">Панель администратора - создание новой статьи</h2>
 
-<?php if($error): ?>
-    <div class="error">Внимание! Необходимо заполнить все обязательные поля поля!</div>
+<?php if( $error ): ?>
+    <div class="error">Внимание! Необходимо заполнить все обязательные (
+        <?php foreach ( $error as $currentError): ?>
+            <?= $currentError ?>
+        <?php endforeach ?>
+        ) поля поля!</div>
 <?php endif ?>
 
 <form action="new.php" method="post" class="form">

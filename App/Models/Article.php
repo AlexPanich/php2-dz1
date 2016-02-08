@@ -15,7 +15,7 @@ class Article extends Model
 
     protected $title;
     protected $text;
-    protected static $required = ['title'];
+    protected static $required = ['title', 'text'];
     protected $author_id;
 
     /**

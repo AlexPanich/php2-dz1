@@ -15,7 +15,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $view = new \App\View();
         $view->article = $article;
-        $view->error = true;
+        $view->error = \App\Error::instance();
     }
 } else {
 

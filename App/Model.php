@@ -70,7 +70,10 @@ abstract class Model
             }
             if ( !$value && $value !== '0' ) {
                 if ( in_array($key, static::$required) ) {
-                    return false;
+
+                    /** @var Error $error */
+                    $error = Error::instance();
+                    $error[] = $key;
                 }
                 $masks[] = 'NULL';
             } else {
@@ -78,6 +81,9 @@ abstract class Model
                 $values[':'.$key] = $value;
             }
             $columns[] = $key;
+        }
+        if ( isset($error) ) {
+            return false;
         }
 
         $sql = 'INSERT INTO ' . static::TABLE .
@@ -108,7 +114,10 @@ abstract class Model
             }
             if ( !$value && $value !== '0' ) {
                 if ( in_array($key, static::$required) ) {
-                    return false;
+
+                    /** @var Error $error */
+                    $error = Error::instance();
+                    $error[] = $key;
                 }
                 $sets[] = $key.'=NULL';
             } else {
@@ -116,6 +125,9 @@ abstract class Model
                 $values[':'.$key] = $value;
             }
             $columns[] = $key;
+        }
+        if ( isset($error) ) {
+            return false;
         }
         $values[':id'] = $this->id;
         $sql = 'UPDATE ' . static::TABLE .
