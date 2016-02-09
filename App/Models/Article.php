@@ -73,6 +73,7 @@ class Article extends Model
      * @return array
      */
     public static function findLastN($n) {
+        /** @var DB $db */
         $db = DB::instance();
         $sql = sprintf('SELECT * FROM ' . self::TABLE .
             ' ORDER BY id DESC LIMIT %d', $n);
@@ -89,11 +90,16 @@ class Article extends Model
      */
     public function __get($name) {
         if ( $name == 'authors' ) {
-            if (!empty($this->author_id)) {
+            if ( !empty($this->author_id) ) {
                 return Author::findById($this->author_id);
             }
         }
         return null;
+    }
+
+    public function __isset($name)
+    {
+        return $name == 'authors' ? !empty($this->author_id) ? true: false : false;
     }
 
     /**
