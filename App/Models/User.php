@@ -19,14 +19,6 @@ class User extends Model
     /**
      * @return string
      */
-    public function __toString()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
     public function getEmail()
     {
         return $this->email;

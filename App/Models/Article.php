@@ -7,6 +7,7 @@ use App\DB;
 
 /**
  * Class Article
+ * @property Author|null author
  * @package App\Models
  */
 class Article extends Model
@@ -17,6 +18,7 @@ class Article extends Model
     protected $text;
     protected static $required = ['title', 'text'];
     protected $author_id;
+    protected $author;
 
     /**
      * @param  string $title
@@ -89,24 +91,47 @@ class Article extends Model
      * @return Author|null
      */
     public function __get($name) {
-        if ( $name == 'authors' ) {
-            if ( !empty($this->author_id) ) {
-                return Author::findById($this->author_id);
-            }
+        switch ($name) {
+            case 'authors':
+                if ( !empty($this->author_id) ) {
+                    return Author::findById($this->author_id);
+                }
+                return null;
+            default:
+                return null;
         }
-        return null;
     }
 
+    /**
+     * @return Author|null
+     */
+    public function getAuthor() {
+        if ( empty($this->author) ) {
+            $this->author = $this->authors;
+        }
+        return $this->author;
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
     public function __isset($name)
     {
-        return $name == 'authors' ? !empty($this->author_id) ? true: false : false;
+        switch ($name) {
+            case 'authors':
+                return !empty($this->author_id);
+                break;
+            default:
+                return false;
+        }
     }
 
     /**
      * @return bool
      */
-    public function hasAuthors()
+    public function hasAuthor()
     {
-        return !empty($this->author_id);
+        return !empty($this->authors);
     }
 }

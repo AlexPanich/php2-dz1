@@ -8,8 +8,8 @@
 <body>
 <h2><?= $article->getTitle() ?></h2>
 <p><?= $article->getText() ?></p>
-<?php if ( $article->hasAuthors() ): ?>
-    <blockquote class="author">Автор: <?= $article->authors; ?></blockquote>
+<?php if ( $article->hasAuthor() ): ?>
+    <blockquote class="author">Автор: <?= $article->getAuthor()->getName(); ?></blockquote>
 <?php else: ?>
     <div class="no-author">Без автора</div>
 <?php endif ?>

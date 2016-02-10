@@ -15,8 +15,8 @@
                 <h3><?= $article->getTitle() ?></h3>
             </a>
             <p><?= $article->getShortText() ?></p>
-            <?php if ( $article->hasAuthors() ): ?>
-                <blockquote class="author">Автор: <?= $article->authors; ?></blockquote>
+            <?php if ( $article->hasAuthor() ): ?>
+                <blockquote class="author">Автор: <?= $article->getAuthor()->getName(); ?></blockquote>
             <?php endif ?>
         </li>
     <?php endforeach ?>

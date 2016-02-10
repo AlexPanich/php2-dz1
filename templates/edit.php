@@ -16,7 +16,7 @@
         ) поля!</div>
 <?php endif ?>
 
-<div>Автор статьи: <?= $article->authors ? : 'Без автора' ?></div>
+<div>Автор статьи: <?= $article->getAuthor()->getName() ? : 'Без автора' ?>, <?= $article->getAuthor()->getEmail() ?></div>
 <form action="edit.php" method="post" class="form">
     <laber for="article-title">Название статьи:</laber>
     <input class="input-title" type="text" id="article-title" name="title" value="<?=  $article->getTitle() ?>">

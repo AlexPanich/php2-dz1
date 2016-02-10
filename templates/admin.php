@@ -16,8 +16,9 @@
             </a>
             <p><?= $article->getShortText() ?></p>
             <a href="delete.php?id=<?= $article->getId() ?>">Удалить статью</a>
-            <?php if ( $article->hasAuthors() ): ?>
-                <blockquote class="author">Автор: <?= $article->authors; ?></blockquote>
+            <?php if ( $article->hasAuthor() ): ?>
+                <blockquote class="author">Автор: <?= $article->getAuthor()->getName(); ?></blockquote>
+                <blockquote class="author">Email: <?= $article->getAuthor()->getEmail(); ?></blockquote>
             <?php endif ?>
         </li>
     <?php endforeach ?>
