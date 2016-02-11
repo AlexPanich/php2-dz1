@@ -2,9 +2,31 @@
 
 require_once __DIR__.'/autoload.php';
 
-$view = new \App\View();
-$view->news = \App\Models\Article::findLastN(3);
+$uri = explode('/', $_SERVER['REQUEST_URI']);
 
-$view->display(__DIR__.'/templates/index.php');
+$params = [];
 
+foreach ( $uri as $value ) {
+    if ( $value != '') {
+        $params[] = $value;
+    }
+}
 
+if ( empty($params[0]) ) {
+    $params[0] = 'article';
+}
+
+switch ( $params[0] ) {
+    case 'article':
+        $controller = new \App\Controllers\Article();
+        break;
+    case 'admin':
+        $controller = new \App\Controllers\Admin();
+        break;
+    default:
+        die('404');
+}
+
+$action = isset($params[1]) ? $params[1]: 'index';
+
+$controller->action($action);

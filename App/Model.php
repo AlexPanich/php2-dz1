@@ -65,7 +65,7 @@ abstract class Model
         $masks = [];
         $values = [];
         foreach ( $this as $key => $value) {
-            if ( 'id' == $key || 'required' == $key ) {
+            if ( 'id' == $key || 'required' == $key || 'author' == $key ) {
                 continue;
             }
             if ( !$value && $value !== '0' ) {
@@ -109,7 +109,7 @@ abstract class Model
         $sets = [];
         $values = [];
         foreach ( $this as $key => $value) {
-            if ( 'id' == $key || 'required' == $key ) {
+            if ( 'id' == $key || 'required' == $key || 'author' == $key ) {
                 continue;
             }
             if ( !$value && $value !== '0' ) {

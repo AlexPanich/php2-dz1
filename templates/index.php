@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body>
-<a href="admin.php">Панель администратора</a>
+<a href="/admin">Панель администратора</a>
 <h2>Новости нашего городка:</h2>
 <ul>
     <?php foreach( $news as $article ): ?>
         <li>
-            <a href="article.php?id=<?= $article->getId() ?>">
+            <a href="/article/one/?id=<?= $article->getId() ?>">
                 <h3><?= $article->getTitle() ?></h3>
             </a>
             <p><?= $article->getShortText() ?></p>
