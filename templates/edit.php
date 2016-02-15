@@ -11,7 +11,7 @@
 <?php if($error): ?>
     <div class="error">Внимание! Необходимо заполнить все обязательные (
         <?php foreach ( $error as $currentError ): ?>
-            <?= $currentError ?>
+            <?= $currentError->getMessage() ?>
         <?php endforeach ?>
         ) поля!</div>
 <?php endif ?>

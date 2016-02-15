@@ -17,12 +17,9 @@ class Article extends Controller
 
     protected function actionOne()
     {
-        $id = (int)$_GET['id'];
-
-        if ( !$this->view->article = \App\Models\Article::findById($id) ) {
-            die('Нет такой статьи');
+        if ( !$this->view->article = \App\Models\Article::findById($_GET['id']) ) {
+            $this->action404();
         }
-
 
         $this->view->display(__DIR__.'/../../templates/article.php');
     }

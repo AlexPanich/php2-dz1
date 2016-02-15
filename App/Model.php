@@ -38,7 +38,7 @@ abstract class Model
         $res = $db->query(
             'SELECT * FROM ' . static::TABLE .' WHERE id=:id',
             static::class,
-            [':id' => $id]
+            [':id' => (int)$id]
         );
 
         return !$res ? false : $res[0];
@@ -71,9 +71,11 @@ abstract class Model
             if ( !$value && $value !== '0' ) {
                 if ( in_array($key, static::$required) ) {
 
-                    /** @var Error $error */
-                    $error = Error::instance();
-                    $error[] = $key;
+                    /** @var MultiException $error */
+                    if ( !isset($error) ) {
+                        $error = new MultiException();
+                    }
+                    $error[] =  new \Exception($key);
                 }
                 $masks[] = 'NULL';
             } else {
@@ -83,7 +85,7 @@ abstract class Model
             $columns[] = $key;
         }
         if ( isset($error) ) {
-            return false;
+            throw $error;
         }
 
         $sql = 'INSERT INTO ' . static::TABLE .
@@ -115,9 +117,11 @@ abstract class Model
             if ( !$value && $value !== '0' ) {
                 if ( in_array($key, static::$required) ) {
 
-                    /** @var Error $error */
-                    $error = Error::instance();
-                    $error[] = $key;
+                    /** @var MultiException $error */
+                    if ( !isset($error) ) {
+                        $error = new MultiException();
+                    }
+                    $error[] = new \Exception($key);
                 }
                 $sets[] = $key.'=NULL';
             } else {
@@ -127,7 +131,7 @@ abstract class Model
             $columns[] = $key;
         }
         if ( isset($error) ) {
-            return false;
+            throw $error;
         }
         $values[':id'] = $this->id;
         $sql = 'UPDATE ' . static::TABLE .

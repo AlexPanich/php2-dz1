@@ -30,4 +30,17 @@ class Controller
     {
         return $_SERVER['REQUEST_METHOD'] == 'GET';
     }
+
+    protected function redirect($uri)
+    {
+        header('Location: '.$uri);
+        exit();
+    }
+
+    public function action404()
+    {
+        header("HTTP/1.0 404 Not Found");
+        $this->view->display(__DIR__.'/templates/404.php');
+        exit();
+    }
 }

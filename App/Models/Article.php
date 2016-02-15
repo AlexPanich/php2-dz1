@@ -134,4 +134,14 @@ class Article extends Model
     {
         return !empty($this->authors);
     }
+
+    public function fill($array = [])
+    {
+        foreach ($array as $key => $value) {
+            if ( property_exists(self::class, $key) ) {
+                $this->$key = htmlentities(trim(strip_tags($value)), ENT_QUOTES);
+            }
+        }
+
+    }
 }

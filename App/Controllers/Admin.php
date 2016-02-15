@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Controller;
+use App\MultiException;
 
 class Admin extends Controller
 {
@@ -20,18 +21,15 @@ class Admin extends Controller
     {
         if ( $this->isPost() ) {
             $article = new \App\Models\Article();
-            $title = htmlspecialchars(trim(strip_tags($_POST['title'])));
-            $text = htmlspecialchars(trim(strip_tags($_POST['text'])));
+            $article->fill($_POST);
 
-            $article->setTitle($title)->setText($text);
-
-            if ( $article->save() ) {
-                header('Location: /admin');
-                exit();
+            try {
+                $article->save();
+                $this->redirect('/admin');
+            } catch (MultiException $error) {
+                $this->view->article = $article;
+                $this->view->error = $error;
             }
-
-            $this->view->article = $article;
-            $this->view->error = \App\Error::instance();
         } else {
             $this->view->error = false;
         }
@@ -42,46 +40,37 @@ class Admin extends Controller
     public function actionEdit()
     {
         if ( $this->isPost() ) {
-            $id = (int)$_POST['id'];
-            $title = htmlspecialchars(trim(strip_tags($_POST['title'])));
-            $text = htmlspecialchars(trim(strip_tags($_POST['text'])));
-            $article = \App\Models\Article::findById($id);
-            $article->setTitle($title)->setText($text);
+            $article = \App\Models\Article::findById($_POST['id']);
+            $article->fill($_POST);
 
-            if ( $article->save() ) {
-                header('Location: /admin');
-                exit();
-            } else {
-                $view = new \App\View();
-                $view->article = $article;
-                $view->error = \App\Error::instance();
+            try {
+                $article->save();
+                $this->redirect('/admin');
+            } catch (MultiException $error) {
+                $this->view->article = $article;
+                $this->view->error = $error;
             }
+
         } else {
-
             if (!isset($_GET['id'])) {
-                header('Location: /admin');
-                exit();
+                $this->redirect('/admin');
             }
-
-            $view = new \App\View();
-            $view->error = false;
-            $id = (int)$_GET['id'];
-            $view->article = \App\Models\Article::findById($id);
+            $this->view->error = false;
+            $this->view->article = \App\Models\Article::findById($_GET['id']);
         }
-        $view->display(__DIR__.'/../../templates/edit.php');
+        $this->view->display(__DIR__.'/../../templates/edit.php');
     }
 
     public function actionDelete()
     {
         if ( !isset($_GET['id']) ) {
-            header('Location: /admin');
-            exit();
+            $this->redirect('/admin');
         }
 
-        $id = (int)$_GET['id'];
-        $article = \App\Models\Article::findById($id);
+        $article = \App\Models\Article::findById($_GET['id']);
         $article->delete();
 
-        header('Location: /admin');
+        $this->redirect('/admin');
     }
+
 }
