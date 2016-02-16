@@ -65,11 +65,15 @@ class DB
     protected function __construct()
     {
         $config = Config::instance();
-        $this->dbh = new \PDO(
-            'mysql:host='.$config->data['db']['host'].
-            ';dbname='.$config->data['db']['dbname'],
-            $config->data['db']['user'],
-            $config->data['db']['password']);
+        try {
+            $this->dbh = new \PDO(
+                'mysql:host=' . $config->data['db']['host'] .
+                ';dbname=' . $config->data['db']['dbname'],
+                $config->data['db']['user'],
+                $config->data['db']['password']);
+        } catch (\PDOException $e) {
+            throw new \App\Exception\DB('Ошибка базы данных: ' . $e->getMessage());
+        }
         $this->dbh->query('SET NAMES utf8');
     }
 

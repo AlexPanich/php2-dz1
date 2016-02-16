@@ -135,7 +135,7 @@ class Article extends Model
         return !empty($this->authors);
     }
 
-    public function fill($array = [])
+    public function fill(array $array = [])
     {
         foreach ($array as $key => $value) {
             if ( property_exists(self::class, $key) ) {

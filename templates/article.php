@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Новость - <?= $article->getTitle() ?></title>
-    <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="/templates/css/style.css">
 </head>
 <body>
 <h2><?= $article->getTitle() ?></h2>

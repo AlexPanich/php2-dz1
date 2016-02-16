@@ -29,4 +29,15 @@ switch ( $params[0] ) {
 
 $action = isset($params[1]) ? $params[1]: 'index';
 
-$controller->action($action);
+try {
+    $controller->action($action);
+    exit();
+} catch ( \App\Exception\DB $e ) {
+    $action = 'DBError';
+} catch ( \App\Exception\Error404 $e ) {
+    $action = 'error404';
+} finally {
+    $controller = new \App\Controllers\Error();
+    $controller->action($action);
+    \App\Logger::instance()->save($e->getMessage());
+}

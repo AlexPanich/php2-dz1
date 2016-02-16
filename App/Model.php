@@ -54,6 +54,7 @@ abstract class Model
 
     /**
      * @return bool
+     * @throws MultiException
      */
     public function insert()
     {
@@ -101,6 +102,7 @@ abstract class Model
 
     /**
      * @return bool
+     * @throws MultiException
      */
     public function update()
     {

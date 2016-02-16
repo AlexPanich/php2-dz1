@@ -50,7 +50,6 @@ class Admin extends Controller
                 $this->view->article = $article;
                 $this->view->error = $error;
             }
-
         } else {
             if (!isset($_GET['id'])) {
                 $this->redirect('/admin');

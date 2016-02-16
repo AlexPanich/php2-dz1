@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Панель администратора</title>
-    <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="/templates/css/style.css">
 </head>
 <body>
 <h2>Панель администратора</h2>

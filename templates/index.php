@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Главная страница - Новости</title>
-    <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="/templates/css/style.css">
 </head>
 <body>
 <a href="/admin">Панель администратора</a>

@@ -46,3 +46,14 @@
     font-style: italic;
     font-color: #eee;
 }
+
+.error-db,
+.error404 {
+    padding: 40px;
+    background-color: lightblue;
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+}
