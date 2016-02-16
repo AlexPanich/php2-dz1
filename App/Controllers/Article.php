@@ -18,6 +18,9 @@ class Article extends Controller
 
     protected function actionOne()
     {
+        if ( empty($_GET['id']) ) {
+            throw new Error404('Ошибка 404: не указана статья');
+        }
         if ( !$this->view->article = \App\Models\Article::findById($_GET['id']) ) {
             throw new Error404('Ошибка 404: нет записи с id='. $_GET['id']);
         }
