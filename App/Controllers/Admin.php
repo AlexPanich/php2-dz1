@@ -5,13 +5,14 @@ namespace App\Controllers;
 
 
 use App\Controller;
+use App\Models\Article;
 use App\MultiException;
 
 class Admin extends Controller
 {
     public function actionIndex()
     {
-        $this->view->news = \App\Models\Article::findAll();
+        $this->view->news = Article::findAll();
 
         $this->view->display(__DIR__.'/../../templates/admin.php');
 
@@ -20,10 +21,10 @@ class Admin extends Controller
     public function actionNew()
     {
         if ( $this->isPost() ) {
-            $article = new \App\Models\Article();
-            $article->fill($_POST);
+            $article = new Article();
 
             try {
+                $article->fill($_POST);
                 $article->save();
                 $this->redirect('/admin');
             } catch (MultiException $error) {
@@ -40,10 +41,10 @@ class Admin extends Controller
     public function actionEdit()
     {
         if ( $this->isPost() ) {
-            $article = \App\Models\Article::findById($_POST['id']);
-            $article->fill($_POST);
+            $article = Article::findById($_POST['id']);
 
             try {
+                $article->fill($_POST);
                 $article->save();
                 $this->redirect('/admin');
             } catch (MultiException $error) {
@@ -55,7 +56,7 @@ class Admin extends Controller
                 $this->redirect('/admin');
             }
             $this->view->error = false;
-            $this->view->article = \App\Models\Article::findById($_GET['id']);
+            $this->view->article = Article::findById($_GET['id']);
         }
         $this->view->display(__DIR__.'/../../templates/edit.php');
     }
@@ -66,7 +67,7 @@ class Admin extends Controller
             $this->redirect('/admin');
         }
 
-        $article = \App\Models\Article::findById($_GET['id']);
+        $article = Article::findById($_GET['id']);
         $article->delete();
 
         $this->redirect('/admin');

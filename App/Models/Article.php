@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Model;
 use App\DB;
+use App\MultiException;
 
 /**
  * Class Article
@@ -141,6 +142,21 @@ class Article extends Model
             if ( property_exists(self::class, $key) ) {
                 $this->$key = htmlentities(trim(strip_tags($value)), ENT_QUOTES);
             }
+        }
+        foreach ( $this as $key => $value ) {
+            if ( !$value && $value !== '0' ) {
+                if (in_array($key, static::$required)) {
+
+                    /** @var MultiException $error */
+                    if (!isset($error)) {
+                        $error = new MultiException();
+                    }
+                    $error[] = new \Exception($key);
+                }
+            }
+        }
+        if ( isset($error) ) {
+            throw $error;
         }
 
     }
