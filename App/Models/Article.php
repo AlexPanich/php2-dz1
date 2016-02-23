@@ -133,7 +133,7 @@ class Article extends Model
      */
     public function hasAuthor()
     {
-        return !empty($this->authors);
+        return isset($this->authors);
     }
 
     public function fill(array $array = [])
