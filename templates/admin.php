@@ -9,14 +9,14 @@
 <h2>Панель администратора</h2>
 <a href="/admin/new"><b>Новая статья</b></a>
 <ul>
-    <?php foreach( $news as $article ): ?>
+    <?php foreach ($news as $article): ?>
         <li>
             <a href="/admin/edit/?id=<?= $article->getId() ?>">
                 <h3><?= $article->getTitle() ?></h3>
             </a>
             <p><?= $article->getShortText() ?></p>
             <a href="/admin/delete/?id=<?= $article->getId() ?>">Удалить статью</a>
-            <?php if ( $article->hasAuthor() ): ?>
+            <?php if ($article->hasAuthor()): ?>
                 <blockquote class="author">Автор: <?= $article->getAuthor()->getName(); ?></blockquote>
                 <blockquote class="author">Email: <?= $article->getAuthor()->getEmail(); ?></blockquote>
             <?php endif ?>

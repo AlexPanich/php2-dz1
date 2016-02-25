@@ -9,13 +9,13 @@
 <a href="/admin">Панель администратора</a>
 <h2>Новости нашего городка:</h2>
 <ul>
-    <?php foreach( $news as $article ): ?>
+    <?php foreach ($news as $article): ?>
         <li>
             <a href="/article/one/?id=<?= $article->getId() ?>">
                 <h3><?= $article->getTitle() ?></h3>
             </a>
             <p><?= $article->getShortText() ?></p>
-            <?php if ( $article->hasAuthor() ): ?>
+            <?php if ($article->hasAuthor()): ?>
                 <blockquote class="author">Автор: <?= $article->getAuthor()->getName(); ?></blockquote>
             <?php endif ?>
         </li>

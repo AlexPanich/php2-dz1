@@ -13,18 +13,18 @@ class Article extends Controller
     protected function actionIndex()
     {
         $this->view->news = \App\Models\Article::findLastN(3);
-        $this->view->display(__DIR__.'/../../templates/index.php');
+        $this->view->display(__DIR__ . '/../../templates/index.php');
     }
 
     protected function actionOne()
     {
-        if ( empty($_GET['id']) ) {
+        if (empty($_GET['id'])) {
             throw new Error404('Ошибка 404: не указана статья');
         }
-        if ( !$this->view->article = \App\Models\Article::findById($_GET['id']) ) {
-            throw new Error404('Ошибка 404: нет записи с id='. $_GET['id']);
+        if (!$this->view->article = \App\Models\Article::findById($_GET['id'])) {
+            throw new Error404('Ошибка 404: нет записи с id=' . $_GET['id']);
         }
 
-        $this->view->display(__DIR__.'/../../templates/article.php');
+        $this->view->display(__DIR__ . '/../../templates/article.php');
     }
 }

@@ -14,13 +14,13 @@ class Admin extends Controller
     {
         $this->view->news = Article::findAll();
 
-        $this->view->display(__DIR__.'/../../templates/admin.php');
+        $this->view->display(__DIR__ . '/../../templates/admin.php');
 
     }
 
     public function actionNew()
     {
-        if ( $this->isPost() ) {
+        if ($this->isPost()) {
             $article = new Article();
 
             try {
@@ -35,12 +35,12 @@ class Admin extends Controller
             $this->view->error = false;
         }
 
-        $this->view->display(__DIR__.'/../../templates/new.php');
+        $this->view->display(__DIR__ . '/../../templates/new.php');
     }
 
     public function actionEdit()
     {
-        if ( $this->isPost() ) {
+        if ($this->isPost()) {
             $article = Article::findById($_POST['id']);
 
             try {
@@ -58,12 +58,12 @@ class Admin extends Controller
             $this->view->error = false;
             $this->view->article = Article::findById($_GET['id']);
         }
-        $this->view->display(__DIR__.'/../../templates/edit.php');
+        $this->view->display(__DIR__ . '/../../templates/edit.php');
     }
 
     public function actionDelete()
     {
-        if ( !isset($_GET['id']) ) {
+        if (!isset($_GET['id'])) {
             $this->redirect('/admin');
         }
 

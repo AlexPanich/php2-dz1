@@ -20,7 +20,7 @@ class View
     public function render($template)
     {
         ob_start();
-        foreach ( $this->data as $prop => $value ) {
+        foreach ($this->data as $prop => $value) {
             $$prop = $value;
         }
         include $template;
@@ -30,7 +30,7 @@ class View
     /**
      * @param string $template
      */
-    public  function display($template)
+    public function display($template)
     {
         echo $this->render($template);
     }

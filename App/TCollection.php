@@ -10,7 +10,6 @@ trait TCollection
     protected $position = 0;
 
 
-
     public function offsetExists($offset)
     {
         return isset($this->data[$offset]);
@@ -25,7 +24,7 @@ trait TCollection
 
     public function offsetSet($offset, $value)
     {
-        if ( is_null($offset) ) {
+        if (is_null($offset)) {
             $this->data[] = $value;
         } else {
             $this->container[$offset] = $value;

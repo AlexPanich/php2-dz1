@@ -23,7 +23,7 @@ class Controller
     public function action($action)
     {
         $methodName = 'action' . ucfirst($action);
-        if ( !method_exists($this, $methodName) ) {
+        if (!method_exists($this, $methodName)) {
             throw new Error404('Ошибка 404: Запрошен не верный метод');
         }
         return $this->$methodName();
@@ -41,7 +41,7 @@ class Controller
 
     protected function redirect($uri)
     {
-        header('Location: '.$uri);
+        header('Location: ' . $uri);
         exit();
     }
 }

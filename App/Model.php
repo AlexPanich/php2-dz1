@@ -36,7 +36,7 @@ abstract class Model
         /** @var DB $db */
         $db = DB::instance();
         $res = $db->query(
-            'SELECT * FROM ' . static::TABLE .' WHERE id=:id',
+            'SELECT * FROM ' . static::TABLE . ' WHERE id=:id',
             static::class,
             [':id' => (int)$id]
         );
@@ -65,22 +65,22 @@ abstract class Model
         $columns = [];
         $masks = [];
         $values = [];
-        foreach ( $this as $key => $value) {
-            if ( 'id' == $key || 'required' == $key || 'author' == $key ) {
+        foreach ($this as $key => $value) {
+            if ('id' == $key || 'required' == $key || 'author' == $key) {
                 continue;
             }
-            if ( !$value && $value !== '0' ) {
+            if (!$value && $value !== '0') {
                 $masks[] = 'NULL';
             } else {
-                $masks[] = ':'.$key;
-                $values[':'.$key] = $value;
+                $masks[] = ':' . $key;
+                $values[':' . $key] = $value;
             }
             $columns[] = $key;
         }
 
         $sql = 'INSERT INTO ' . static::TABLE .
-                '('.implode(',',$columns).') '.
-                'VALUES ('.implode(',', $masks) .')';
+            '(' . implode(',', $columns) . ') ' .
+            'VALUES (' . implode(',', $masks) . ')';
 
         /** @var DB $db */
         $db = DB::instance();
@@ -101,22 +101,22 @@ abstract class Model
 
         $sets = [];
         $values = [];
-        foreach ( $this as $key => $value) {
-            if ( 'id' == $key || 'required' == $key || 'author' == $key ) {
+        foreach ($this as $key => $value) {
+            if ('id' == $key || 'required' == $key || 'author' == $key) {
                 continue;
             }
-            if ( !$value && $value !== '0' ) {
-                $sets[] = $key.'=NULL';
+            if (!$value && $value !== '0') {
+                $sets[] = $key . '=NULL';
             } else {
-                $sets[] = $key.'=:'.$key;
-                $values[':'.$key] = $value;
+                $sets[] = $key . '=:' . $key;
+                $values[':' . $key] = $value;
             }
             $columns[] = $key;
         }
         $values[':id'] = $this->id;
         $sql = 'UPDATE ' . static::TABLE .
-                ' SET ' .implode(',', $sets) .
-                ' WHERE id=:id';
+            ' SET ' . implode(',', $sets) .
+            ' WHERE id=:id';
 
         /** @var DB $db */
         $db = DB::instance();
@@ -137,8 +137,8 @@ abstract class Model
      */
     public function delete()
     {
-        $sql = 'DELETE FROM ' .static::TABLE .
-                ' WHERE id=:id';
+        $sql = 'DELETE FROM ' . static::TABLE .
+            ' WHERE id=:id';
 
         $values[':id'] = $this->id;
 

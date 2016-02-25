@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="/templates/css/style.css">
 </head>
 <body>
-    <div class="error-db">
-        Ошибка доступа к базе данных, зайдите пожалуйста позже.
-    </div>
+<div class="error-db">
+    Ошибка доступа к базе данных, зайдите пожалуйста позже.
+</div>
 </body>
 </html>

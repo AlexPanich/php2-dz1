@@ -60,14 +60,16 @@ class Article extends Model
     /**
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getShortText() {
+    public function getShortText()
+    {
         return mb_substr($this->text, 0, 60) . '...';
     }
 
@@ -75,7 +77,8 @@ class Article extends Model
      * @param integer $n
      * @return array
      */
-    public static function findLastN($n) {
+    public static function findLastN($n)
+    {
         /** @var DB $db */
         $db = DB::instance();
         $sql = sprintf('SELECT * FROM ' . self::TABLE .
@@ -91,10 +94,11 @@ class Article extends Model
      * @param string $name
      * @return Author|null
      */
-    public function __get($name) {
+    public function __get($name)
+    {
         switch ($name) {
             case 'authors':
-                if ( !empty($this->author_id) ) {
+                if (!empty($this->author_id)) {
                     return Author::findById($this->author_id);
                 }
                 return null;
@@ -106,8 +110,9 @@ class Article extends Model
     /**
      * @return Author|null
      */
-    public function getAuthor() {
-        if ( empty($this->author) ) {
+    public function getAuthor()
+    {
+        if (empty($this->author)) {
             $this->author = $this->authors;
         }
         return $this->author;
@@ -139,12 +144,12 @@ class Article extends Model
     public function fill(array $array = [])
     {
         foreach ($array as $key => $value) {
-            if ( property_exists(self::class, $key) ) {
+            if (property_exists(self::class, $key)) {
                 $this->$key = htmlentities(trim(strip_tags($value)), ENT_QUOTES);
             }
         }
-        foreach ( $this as $key => $value ) {
-            if ( !$value && $value !== '0' ) {
+        foreach ($this as $key => $value) {
+            if (!$value && $value !== '0') {
                 if (in_array($key, static::$required)) {
 
                     /** @var MultiException $error */
@@ -155,7 +160,7 @@ class Article extends Model
                 }
             }
         }
-        if ( isset($error) ) {
+        if (isset($error)) {
             throw $error;
         }
 
