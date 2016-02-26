@@ -5,7 +5,10 @@ return [
         'host' => 'localhost',
         'user' => 'root',
         'password' => '',
-        'dbname' => 'php2',
+        'dbname' => 'php2в',
     ],
+    'email' => [
+        'admin' => 'nasada@yandex.ru',
+    ]
 ];
 
