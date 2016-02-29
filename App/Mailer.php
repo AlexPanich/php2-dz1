@@ -15,16 +15,16 @@ class Mailer
     protected function __construct()
     {
         $this->transport = \Swift_SmtpTransport::newInstance('smtp.yandex.ru', 465, 'ssl')
-                ->setUsername('secret')
-                ->setPassword('secret');
+                ->setUsername(Config::instance()->data['mailer']['login'])
+                ->setPassword(Config::instance()->data['mailer']['password']);
         $this->mailer = \Swift_Mailer::newInstance($this->transport);
     }
 
     public function send($message)
     {
         $this->message = \Swift_Message::newInstance()
-            ->setFrom('secret')
-            ->setTo(Config::instance()->data['email']['admin'])
+            ->setFrom(Config::instance()->data['mailer']['from'])
+            ->setTo(Config::instance()->data['admin']['email'])
             ->setSubject('Ошибка подключения к БД')
             ->setBody($message);
         $this->mailer->send($this->message);

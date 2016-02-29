@@ -5,10 +5,15 @@ return [
         'host' => 'localhost',
         'user' => 'root',
         'password' => '',
-        'dbname' => 'php2',
+        'dbname' => 'php2d',
     ],
-    'email' => [
-        'admin' => 'nasada@yandex.ru',
+    'admin' => [
+        'email' => 'nasada@yandex.ru',
+    ],
+    'mailer' => [
+        'login' => 'secret',
+        'password' => 'secret',
+        'from' => 'secret',
     ]
 ];
 
