@@ -38,7 +38,7 @@ try {
     exit();
 } catch (\App\Exception\DB $e) {
     $action = 'DBError';
-    \App\Mailer::instance()->send('Ошибка подключения к БД' . $e->getCode());
+    \App\Mailer::instance()->send('Ошибка подключения к БД');
 } catch (\App\Exception\Error404 $e) {
     $action = 'error404';
 } finally {
