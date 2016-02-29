@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Models\Article;
-use App\MultiException;
+use AlexPanich\MultiException;
 
 class Admin extends Controller
 {

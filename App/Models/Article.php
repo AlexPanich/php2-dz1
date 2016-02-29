@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+
+use AlexPanich\MultiException;
 use App\Model;
 use App\DB;
-use App\MultiException;
 
 /**
  * Class Article
@@ -151,8 +152,6 @@ class Article extends Model
         foreach ($this as $key => $value) {
             if (!$value && $value !== '0') {
                 if (in_array($key, static::$required)) {
-
-                    /** @var MultiException $error */
                     if (!isset($error)) {
                         $error = new MultiException();
                     }

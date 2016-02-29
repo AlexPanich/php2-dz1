@@ -10,6 +10,7 @@
     }
   ],
   "require": {
-    "swiftmailer/swiftmailer": "5.x-dev"
+    "swiftmailer/swiftmailer": "5.x-dev",
+    "alexpanich/multiexception": "dev-master"
   }
 }
