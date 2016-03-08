@@ -12,7 +12,8 @@ class Admin extends Controller
 {
     public function actionIndex()
     {
-        $this->view->news = Article::findAll();
+        //$this->view->news = Article::findAll();
+        $this->view->news = Article::findAllWithGenerator();
 
         $this->view->display(__DIR__ . '/../../templates/admin.php');
 

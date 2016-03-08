@@ -21,10 +21,28 @@ abstract class Model
     {
         /** @var DB $db */
         $db = DB::instance();
-        return $db->queryEach(
+
+        return $db->query(
             'SELECT * FROM ' . static::TABLE,
             static::class
         );
+    }
+
+
+    public static function findAllWithGenerator()
+    {
+        /** @var  $db */
+        $db = DB::instance();
+
+        $result = [];
+        $generator = $db->queryEach(
+            'SELECT * FROM ' . static::TABLE,
+            static::class
+        );
+        foreach ($generator as $record) {
+            $result[] = $record;
+        }
+        return $result;
     }
 
     /**

@@ -115,14 +115,13 @@ class DB
     {
         $sub = $this->prepareArray($sub);
         $sth = $this->dbh->prepare($sql);
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $class);
         $res = $sth->execute($sub);
-        $result = [];
         if (false != $res) {
-            $sth->setFetchMode(\PDO::FETCH_CLASS, $class);
-            while($record = $sth->fetch(\PDO::FETCH_CLASS)) {
-                $result[] = $record;
+            while ($record = $sth->fetch(\PDO::FETCH_CLASS)) {
+                yield $record;
             }
         }
-        return $result;
+        return false;
     }
 }
