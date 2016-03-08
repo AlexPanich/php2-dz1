@@ -110,4 +110,19 @@ class DB
         }
         return [];
     }
+
+    public function queryEach($sql, $class, $sub = [])
+    {
+        $sub = $this->prepareArray($sub);
+        $sth = $this->dbh->prepare($sql);
+        $res = $sth->execute($sub);
+        $result = [];
+        if (false != $res) {
+            $sth->setFetchMode(\PDO::FETCH_CLASS, $class);
+            while($record = $sth->fetch(\PDO::FETCH_CLASS)) {
+                $result[] = $record;
+            }
+        }
+        return $result;
+    }
 }

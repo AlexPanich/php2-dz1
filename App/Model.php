@@ -21,7 +21,7 @@ abstract class Model
     {
         /** @var DB $db */
         $db = DB::instance();
-        return $db->query(
+        return $db->queryEach(
             'SELECT * FROM ' . static::TABLE,
             static::class
         );
