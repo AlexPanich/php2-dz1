@@ -17,16 +17,8 @@ class AdminDataTable
 
     public function render()
     {
-        $table = '<table>';
-        foreach ($this->models as $model) {
-            $table .= '<tr>';
-                foreach ($this->functions as $function ) {
-                    $table .= '<td>';
-                    $table .= $function($model);
-                    $table .= '</td>';
-                }
-            $table .= '</tr>';
-        }
-        return $table;
+        ob_start();
+        require_once __DIR__ . '/../templates/table.php';
+        return ob_get_clean();
     }
 }
