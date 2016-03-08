@@ -4,16 +4,30 @@
 namespace App\Controllers;
 
 
+use App\AdminDataTable;
 use App\Controller;
 use App\Models\Article;
 use AlexPanich\MultiException;
+use App\Models\Author;
 
 class Admin extends Controller
 {
     public function actionIndex()
     {
-        //$this->view->news = Article::findAll();
         $this->view->news = Article::findAllWithGenerator();
+
+        $this->view->table = (new AdminDataTable(
+            Author::findAllWithGenerator(),
+            [
+                function($model) {
+                    return $model->getName();
+                },
+                function($model) {
+                    return $model->getEmail();
+                },
+
+            ]
+        ))->render();
 
         $this->view->display(__DIR__ . '/../../templates/admin.php');
 

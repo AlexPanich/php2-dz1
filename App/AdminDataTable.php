@@ -7,16 +7,26 @@ namespace App;
 class AdminDataTable
 {
     protected $models = [];
-    protected $func = [];
+    protected $functions = [];
 
-    public function __construct(array $models, array $func)
+    public function __construct(array $models, array $functions)
     {
         $this->models = $models;
-        $this->func = $func;
+        $this->functions = $functions;
     }
 
     public function render()
     {
-
+        $table = '<table>';
+        foreach ($this->models as $model) {
+            $table .= '<tr>';
+                foreach ($this->functions as $function ) {
+                    $table .= '<td>';
+                    $table .= $function($model);
+                    $table .= '</td>';
+                }
+            $table .= '</tr>';
+        }
+        return $table;
     }
 }

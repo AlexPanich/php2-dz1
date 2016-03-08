@@ -23,5 +23,7 @@
         </li>
     <?php endforeach ?>
 </ul>
+<h3>Все авторы</h3>
+<?= $table ?>
 </body>
 </html>
