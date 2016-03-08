@@ -17,7 +17,7 @@ class Admin extends Controller
         $this->view->news = Article::findAllWithGenerator();
 
         $this->view->table = (new AdminDataTable(
-            Author::findAllWithGenerator(),
+            Author::findAll(),
             [
                 function($model) {
                     return $model->getName();

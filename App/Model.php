@@ -34,15 +34,11 @@ abstract class Model
         /** @var  $db */
         $db = DB::instance();
 
-        $result = [];
-        $generator = $db->queryEach(
+        return $db->queryEach(
             'SELECT * FROM ' . static::TABLE,
             static::class
         );
-        foreach ($generator as $record) {
-            $result[] = $record;
-        }
-        return $result;
+
     }
 
     /**
